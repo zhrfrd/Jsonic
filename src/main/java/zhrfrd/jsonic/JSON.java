@@ -1,30 +1,23 @@
 package zhrfrd.jsonic;
 
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
 
 public class JSON {
-    public Object parseValue() {
+    JSONParser jsonParser;
+
+    public JSON(String jsonString) {
+        jsonParser = new JSONParser(jsonString);
+    }
+
+    public String getString() {
         return null;
     }
 
-    public Map<String, Object> parseObject() {
+    public Object getObject() {
         return null;
     }
 
-    public List<Object> parseArray() {
-        return null;
-    }
-
-    public String parseString() {
-        return null;
-    }
-
-    public Number parseNumber() {
-        return null;
-    }
-
-    public Object parseLiterals() {
+    public Array getArray() {
         return null;
     }
 }
