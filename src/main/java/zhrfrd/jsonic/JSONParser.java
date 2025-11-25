@@ -35,19 +35,8 @@ public class JSONParser {
             case OPEN_BRACE -> parseArray();
             case STRING -> parseString();
             case NUMBER -> parseNumber();
-            case TRUE -> {
-                advance();
-                yield true;
-            }
-            case FALSE -> {
-                advance();
-                yield false;
-            }
-            case NULL -> {
-                advance();
-                yield null;
-            }
-            default -> throw new IllegalStateException("Invalid token type: " + currentToken.getTokenType());
+            case TRUE, FALSE, NULL -> parseLiteral();
+            default -> throw new IllegalStateException("Invalid token: " + currentToken.getTokenType());
         };
     }
 
@@ -112,5 +101,36 @@ public class JSONParser {
 
     private Object parseNumber() {
         return null;
+    }
+
+    /**
+     * Parses the current {@link Token} as a {@code JSON} {@code String} and advance.
+     * @return The {@code String} value of the current {@link Token}.
+     */
+    /**
+     * <p>
+     * Parses the current {@link Token} as a {@code JSON} literal and advances.
+     * </p>
+     * Supported JSON literals are {@code TRUE}, {@code FALSE} and {@code NULL}.
+     * @return The corresponding Java representation of the {@code JSON} literal:
+     *         {@code Boolean} for {@code TRUE}/{@code FALSE}, or {@code null} for {@code NULL}.
+     * @throws RuntimeException If the current token is not a valid literal.
+     */
+    private Object parseLiteral() {
+        return switch (currentToken.getTokenType()) {
+            case TRUE -> {
+                advance();
+                yield true;
+            }
+            case FALSE -> {
+                advance();
+                yield false;
+            }
+            case NULL -> {
+                advance();
+                yield null;
+            }
+            default -> throw new RuntimeException("Invalid literal: " + currentToken.getTokenType());
+        };
     }
 }
