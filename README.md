@@ -13,6 +13,7 @@ JSON objects.
 
 - Java JDK 22 or higher.
 - Maven 3.6.0 or higher (for building and running tests).
+- JUnit 5 5.10.0 (for unit testing).
 
 ## Clone the repository
 
@@ -25,6 +26,29 @@ git clone https://github.com/zhrfrd/Jsonic
 If you have Maven installed:
 ```bash
 mvn clean install
+```
+
+## Running Tests
+This project uses **JUnit 5** for unit testing.
+
+### Maven
+Run all JUnit tests under `src/text/java`:
+```bash
+mvn test
+```
+Run a specific test class:
+```bash
+mvn -Dtest=JSONTest test
+```
+
+### Gradle
+Run all JUnit tests under `src/text/java`:
+```bash
+./gradlew test
+```
+Run a specific test class:
+```bash
+./gradlew test --tests "zhrfrd.jsonic.JSONTest"
 ```
 
 ## Repository structure
