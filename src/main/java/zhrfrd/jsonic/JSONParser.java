@@ -99,14 +99,21 @@ public class JSONParser {
         return value;
     }
 
-    private Object parseNumber() {
-        return null;
+    /**
+     * Parse the current {@link Token} as a {@code JSON} number and advance.
+     * @return a {@link Number} representing the value of the current token ({@link Long} for integers, {@link Double} for decimals).
+     */
+    private Number parseNumber() {
+        String rawNumber = currentToken.getTokenValue();
+        advance();
+
+        if (rawNumber.contains(".")) {
+            return Double.valueOf(rawNumber);
+        }
+
+        return Long.valueOf(rawNumber);
     }
 
-    /**
-     * Parses the current {@link Token} as a {@code JSON} {@code String} and advance.
-     * @return The {@code String} value of the current {@link Token}.
-     */
     /**
      * <p>
      * Parses the current {@link Token} as a {@code JSON} literal and advances.
