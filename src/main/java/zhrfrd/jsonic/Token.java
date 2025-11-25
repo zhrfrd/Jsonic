@@ -17,6 +17,10 @@ public record Token(TokenType tokenType, String tokenValue) {
         return tokenType;
     }
 
+    public String getTokenValue() {
+        return tokenValue;
+    }
+
     // TODO: This code is only for debugging. REMOVE!!!
     @Override
     public String toString() {
