@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>zhrfrd.jsonic</groupId>
-    <artifactId>JSONic</artifactId>
+    <artifactId>Jsonic</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

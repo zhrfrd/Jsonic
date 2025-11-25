@@ -73,7 +73,7 @@ public class JSONParser {
             map.put(key, value);
 
             if (currentToken.getTokenType() == TokenType.COMMA) {
-                advance();
+                advance();   // Skip ','
                 continue;
             }
 
