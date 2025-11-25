@@ -34,3 +34,6 @@ mvn clean install
 ## Notes
 
 ## Resources
+- [Introducing JSON](https://www.json.org/json-en.html).
+- [What is a Lexer, Anyway](dev.to/cad97/what-is-a-lexer-anyway-4kdo).
+- [Crafting Interpreters](https://craftinginterpreters.com/introduction.html).

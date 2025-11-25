@@ -1,5 +1,6 @@
 package zhrfrd.jsonic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class JSONParser {
      * @return A {@code Map} representing the parsed {@code JSON} object, with specific key-value pair.
      */
     private Object parseObject() {
-        advance();   // Skip first '{'
+        advance();   // Skip '{'
         Map<String, Object> map = new HashMap<>();
 
         while (true) {
@@ -82,8 +83,21 @@ public class JSONParser {
         }
     }
 
-    private Object parseArray() {
-        return null;
+    private List<Object> parseArray() {
+        advance();   // Skip '['
+        List<Object> list = new ArrayList<>();
+
+        while (true) {
+            list.add(parseValue());
+
+            if (currentToken.getTokenType() == TokenType.COMMA) {
+                advance();   // Skip ','
+                continue;
+            }
+
+            advance();   // Skip ']'
+            return list;
+        }
     }
 
     /**
