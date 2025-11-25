@@ -7,6 +7,7 @@ public class JSON {
 
     public JSON(String jsonString) {
         jsonParser = new JSONParser(jsonString);
+        jsonParser.parse();
     }
 
     public String getString() {

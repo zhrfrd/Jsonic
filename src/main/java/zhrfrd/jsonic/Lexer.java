@@ -3,11 +3,14 @@ package zhrfrd.jsonic;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Converts a raw {@code JSON} string into a sequence of {@link Token} objects.
+ */
 public class Lexer {
     private final String jsonString;
+    private final List<Token> tokens = new ArrayList<>();
     private char currentChar;
     private int indexChar;
-    private List<Token> tokens = new ArrayList<>();
 
     /**
      * Initialize a new {@code Lexer} used to convert the provided {@code JSON} text into a sequence of {@link Token} objects.
@@ -22,8 +25,6 @@ public class Lexer {
      * Scan the {@code JSON} input string and convert it into a sequence of lexical tokens.
      * For each recognized {@link Token}, the corresponding {@link Token} instance is added to the
      * internal token list.
-     * <p>
-     * If an unrecognized character is encountered {@link RuntimeException} is thrown.
      */
     public void scanJSON() {
         while (currentChar != '\0') {
@@ -69,7 +70,7 @@ public class Lexer {
                 readLiteral();
             }
 
-            throw new RuntimeException("Unexpected character: " + currentChar);
+            throw new IllegalStateException("Invalid character: " + currentChar);
         }
     }
 
@@ -151,7 +152,11 @@ public class Lexer {
                 tokens.add(new Token(TokenType.NULL, "null"));
                 break;
             default:
-                throw new RuntimeException("Invalid literal: " + literal);
+                throw new IllegalStateException("Invalid literal: " + literal);
         }
+    }
+
+    public List<Token> getTokens() {
+        return tokens;
     }
 }
