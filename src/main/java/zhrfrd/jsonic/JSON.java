@@ -1,9 +1,11 @@
 package zhrfrd.jsonic;
 
+import zhrfrd.jsonic.internal.JSONParser;
+
 import java.lang.reflect.Array;
 
 public class JSON {
-    JSONParser jsonParser;
+    private JSONParser jsonParser;
 
     public JSON(String jsonString) {
         jsonParser = new JSONParser(jsonString);

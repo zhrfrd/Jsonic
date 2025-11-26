@@ -1,4 +1,4 @@
-package zhrfrd.jsonic;
+package zhrfrd.jsonic.internal;
 
 /**
  * <p>
@@ -13,11 +13,11 @@ package zhrfrd.jsonic;
  * @param tokenValue The textual value of the {@link Token}, or {@code null} if the token does not carry a value.
  */
 public record Token(TokenType tokenType, String tokenValue) {
-    public TokenType getTokenType() {
+    TokenType getTokenType() {
         return tokenType;
     }
 
-    public String getTokenValue() {
+    String getTokenValue() {
         return tokenValue;
     }
 

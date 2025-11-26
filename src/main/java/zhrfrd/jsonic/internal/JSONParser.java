@@ -1,4 +1,4 @@
-package zhrfrd.jsonic;
+package zhrfrd.jsonic.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class JSONParser {
      * @return The parsed Java object representing the {@code JSON} value.
      * @throws IllegalStateException If the current {@link TokenType} cannot be parsed.
      */
-    public Object parseValue() {
+    private Object parseValue() {
         return switch (currentToken.getTokenType()) {
             case OPEN_BRACKET -> parseObject();
             case OPEN_BRACE -> parseArray();
@@ -72,6 +72,10 @@ public class JSONParser {
         }
     }
 
+    /**
+     * Parses the current {@link Token} as a {@code JSON} {@code List} and advance.
+     * @return A {@code List} representing the parsed {@code JSON} array.
+     */
     private List<Object> parseArray() {
         advance();   // Skip '['
         List<Object> list = new ArrayList<>();

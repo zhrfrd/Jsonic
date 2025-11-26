@@ -1,4 +1,4 @@
-package zhrfrd.jsonic;
+package zhrfrd.jsonic.internal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public class Lexer {
     public Lexer(String jsonString) {
         this.jsonString = jsonString;
         currentChar = jsonString.charAt(0);
+        scanJSON();
     }
 
     /**
@@ -26,7 +27,7 @@ public class Lexer {
      * For each recognized {@link Token}, the corresponding {@link Token} instance is added to the
      * internal token list.
      */
-    public void scanJSON() {
+    private void scanJSON() {
         while (currentChar != '\0') {
             if (Character.isWhitespace(currentChar)) {
                 advance();
@@ -156,7 +157,11 @@ public class Lexer {
         }
     }
 
-    public List<Token> getTokens() {
+    /**
+     * Returns all tokens produced by this {@code Lexer}.
+     * @return The list of generated {@link Token} objects.
+     */
+    protected List<Token> getTokens() {
         return tokens;
     }
 }

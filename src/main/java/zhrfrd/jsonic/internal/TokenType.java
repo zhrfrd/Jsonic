@@ -1,4 +1,4 @@
-package zhrfrd.jsonic;
+package zhrfrd.jsonic.internal;
 
 public enum TokenType {
     // Structural tokens
