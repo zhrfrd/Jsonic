@@ -14,7 +14,11 @@ public class JSON {
     }
 
     public String getString() {
-        return jsonValue.toString();
+        if (jsonValue instanceof String s) {
+            return s;
+        }
+
+        throw new IllegalStateException("JSON value is not a string.");
     }
 
     public Object getObject() {

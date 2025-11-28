@@ -20,6 +20,14 @@ class JSONTest {
     }
 
     @Test
+    void getString_openAndCloseBrackets_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("{}");
+            json.getString();
+        }, "Parsing an empty object and calling getString() method should throw an exception");
+    }
+
+    @Test
     void getString_missingClosingQuote_throwsException() {
         assertThrows(IllegalStateException.class, () -> {
             JSON json = new JSON("\"Hello World");
