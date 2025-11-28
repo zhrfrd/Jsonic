@@ -12,6 +12,12 @@ class JSONTest {
     }
 
     @Test
+    void parseString_stringInputtedWithNewline_returnsParsedString() {
+        JSON json = new JSON("\"Hello \n World\"");
+        assertEquals("Hello \n World", json.getString(), "Should parse a JSON string correctly");
+    }
+
+    @Test
     void parseString_missingClosingQuote_throwsException() {
         assertThrows(IllegalStateException.class, () -> {
             JSON json = new JSON("\"Hello World");
