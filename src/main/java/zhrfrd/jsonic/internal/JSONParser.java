@@ -56,8 +56,18 @@ public class JSONParser {
         advance();   // Skip '{'
         Map<String, Object> map = new HashMap<>();
 
+        if (currentToken.getTokenType() == TokenType.CLOSE_BRACE) {
+            advance();   // Skip '}'
+            return map;
+        }
+
         while (true) {
             String key = parseString();
+
+            if (currentToken.getTokenType() != TokenType.COLON) {
+                throw new IllegalStateException("Invalid token: " + currentToken.getTokenType() + ". Expected ':'.");
+            }
+
             advance();   // Skip ':'
             Object value = parseValue();
             map.put(key, value);
@@ -67,8 +77,12 @@ public class JSONParser {
                 continue;
             }
 
-            advance();   // Skip '}'
-            return map;
+            if (currentToken.getTokenType() == TokenType.CLOSE_BRACE) {
+                advance();   // Skip '}'
+                return map;
+            }
+
+            throw new IllegalStateException("Invalid token: " + currentToken.getTokenType() + ". Expected ',' or '}'.");
         }
     }
 
@@ -99,7 +113,12 @@ public class JSONParser {
      */
     private String parseString() {
         String value = currentToken.getTokenValue();
-        advance();
+
+        // Only advance IF there are more tokens
+        if (indexToken + 1 < tokens.size()) {
+            advance();
+        }
+
         return value;
     }
 

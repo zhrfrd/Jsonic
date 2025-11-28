@@ -13,7 +13,7 @@ public class JSON {
     }
 
     public String getString() {
-        return null;
+        return jsonParser.parse().toString();
     }
 
     public Object getObject() {

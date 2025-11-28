@@ -28,7 +28,7 @@ public class Lexer {
      * internal token list.
      */
     private void scanJSON() {
-        while (currentChar != '\0') {
+        while (indexChar < jsonString.length()) {
             if (Character.isWhitespace(currentChar)) {
                 advance();
                 continue;
@@ -65,10 +65,13 @@ public class Lexer {
             // Value tokens
             if (currentChar == '"') {
                 readString();
+                continue;
             } else if (currentChar == '-' || Character.isDigit(currentChar)) {
                 readNumber();
+                continue;
             } else if (Character.isLetter(currentChar)) {
                 readLiteral();
+                continue;
             }
 
             throw new IllegalStateException("Invalid character: " + currentChar);
@@ -81,8 +84,13 @@ public class Lexer {
      * It should be called after consuming a character during tokenization.
      */
     private void advance() {
-        currentChar = jsonString.charAt(indexChar);
         indexChar ++;
+
+        if (indexChar < jsonString.length()) {
+            currentChar = jsonString.charAt(indexChar);
+        } else {
+            currentChar = '\0';
+        }
     }
 
     /**
@@ -99,10 +107,11 @@ public class Lexer {
         while (currentChar != '"') {
             sb.append(currentChar);
             advance();
+
         }
 
         advance();   // Skip last '"'
-
+        System.out.println(sb);
         tokens.add(new Token(TokenType.STRING, sb.toString()));
     }
 
