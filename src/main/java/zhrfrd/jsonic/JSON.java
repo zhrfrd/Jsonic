@@ -3,21 +3,26 @@ package zhrfrd.jsonic;
 import zhrfrd.jsonic.internal.JSONParser;
 
 import java.lang.reflect.Array;
+import java.util.Map;
 
 public class JSON {
-    private JSONParser jsonParser;
+    private final Object jsonValue;
 
     public JSON(String jsonString) {
-        jsonParser = new JSONParser(jsonString);
-        jsonParser.parse();
+        JSONParser jsonParser = new JSONParser(jsonString);
+        jsonValue = jsonParser.parse(); // store the parsed result
     }
 
     public String getString() {
-        return jsonParser.parse().toString();
+        return jsonValue.toString();
     }
 
     public Object getObject() {
-        return null;
+        if (jsonValue instanceof Map<?, ?> map) {
+            return map;
+        }
+
+        throw new IllegalStateException("JSON value is not an object.");
     }
 
     public Array getArray() {

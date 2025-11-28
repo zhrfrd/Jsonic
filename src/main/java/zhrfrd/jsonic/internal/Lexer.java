@@ -37,19 +37,19 @@ public class Lexer {
             // Structural tokens
             switch (currentChar) {
                 case '{':
-                    tokens.add(new Token(TokenType.OPEN_BRACKET, "{"));
+                    tokens.add(new Token(TokenType.OPEN_BRACE, "{"));
                     advance();
                     continue;
                 case '}':
-                    tokens.add(new Token(TokenType.CLOSE_BRACKET, "}"));
+                    tokens.add(new Token(TokenType.CLOSE_BRACE, "}"));
                     advance();
                     continue;
                 case '[':
-                    tokens.add(new Token(TokenType.OPEN_BRACE, "["));
+                    tokens.add(new Token(TokenType.OPEN_BRACKET, "["));
                     advance();
                     continue;
                 case ']':
-                    tokens.add(new Token(TokenType.CLOSE_BRACE, "]"));
+                    tokens.add(new Token(TokenType.CLOSE_BRACKET, "]"));
                     advance();
                     continue;
                 case ':':
@@ -76,6 +76,8 @@ public class Lexer {
 
             throw new IllegalStateException("Invalid character: " + currentChar);
         }
+
+        tokens.add(new Token(TokenType.EOF, "\0"));
     }
 
     /**

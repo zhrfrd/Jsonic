@@ -31,11 +31,12 @@ public class JSONParser {
      */
     private Object parseValue() {
         return switch (currentToken.getTokenType()) {
-            case OPEN_BRACKET -> parseObject();
-            case OPEN_BRACE -> parseArray();
+            case OPEN_BRACE -> parseObject();
+            case OPEN_BRACKET -> parseArray();
             case STRING -> parseString();
             case NUMBER -> parseNumber();
             case TRUE, FALSE, NULL -> parseLiteral();
+            case EOF -> null;
             default -> throw new IllegalStateException("Invalid token: " + currentToken.getTokenType());
         };
     }
