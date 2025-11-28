@@ -114,7 +114,7 @@ public class JSONParser {
     private String parseString() {
         String value = currentToken.getTokenValue();
 
-        // Only advance IF there are more tokens
+        // Only advance if there are more tokens.
         if (indexToken + 1 < tokens.size()) {
             advance();
         }

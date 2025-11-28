@@ -104,14 +104,16 @@ public class Lexer {
         advance();   // Skip first '"'
         StringBuilder sb = new StringBuilder();
 
-        while (currentChar != '"') {
+        while (currentChar != '"' && currentChar != '\0') {
             sb.append(currentChar);
             advance();
+        }
 
+        if ( currentChar == '\0') {
+            throw new IllegalStateException("Invalid character: " + currentChar + ". Missing closing quote \".");
         }
 
         advance();   // Skip last '"'
-        System.out.println(sb);
         tokens.add(new Token(TokenType.STRING, sb.toString()));
     }
 
