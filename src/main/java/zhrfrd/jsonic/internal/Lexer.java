@@ -136,7 +136,7 @@ public class Lexer {
         // TODO: Improve the way numbers are read following the JSON standard
         StringBuilder sb = new StringBuilder();
 
-        while (currentChar != ' ' && currentChar != '\n') {
+        while (currentChar != ' ' && currentChar != '\n' && currentChar != '\0') {
             sb.append(currentChar);
             advance();
         }
