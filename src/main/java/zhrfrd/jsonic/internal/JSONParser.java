@@ -135,7 +135,14 @@ public class JSONParser {
             return Double.valueOf(rawNumber);
         }
 
-        return Long.valueOf(rawNumber);
+        long longNumber = Long.parseLong(rawNumber);
+
+        // Return int instead of long for numbers within the Integer boundaries.
+        if (longNumber >= Integer.MIN_VALUE && longNumber <= Integer.MAX_VALUE) {
+            return (int)longNumber;
+        }
+
+        return longNumber;
     }
 
     /**

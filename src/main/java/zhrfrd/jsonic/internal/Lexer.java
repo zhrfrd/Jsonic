@@ -36,6 +36,7 @@ public class Lexer {
      */
     private void scanJSON() {
         while (indexChar < jsonString.length()) {
+            System.out.println(currentChar);
             if (Character.isWhitespace(currentChar)) {
                 advance();
                 continue;
@@ -80,6 +81,7 @@ public class Lexer {
                 readLiteral();
                 continue;
             }
+
 
             throw new IllegalStateException("Invalid character: " + currentChar);
         }
@@ -136,7 +138,7 @@ public class Lexer {
         // TODO: Improve the way numbers are read following the JSON standard
         StringBuilder sb = new StringBuilder();
 
-        while (currentChar != ' ' && currentChar != '\n' && currentChar != '\0') {
+        while (Character.isDigit(currentChar) && currentChar != ' ' && currentChar != '\n' && currentChar != '\0') {
             sb.append(currentChar);
             advance();
         }

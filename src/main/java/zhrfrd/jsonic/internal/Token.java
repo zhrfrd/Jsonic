@@ -20,10 +20,4 @@ public record Token(TokenType tokenType, String tokenValue) {
     String getTokenValue() {
         return tokenValue;
     }
-
-    // TODO: This code is only for debugging. REMOVE!!!
-    @Override
-    public String toString() {
-        return tokenType + (tokenValue != null ? "(" + tokenValue + ")" : "");
-    }
 }

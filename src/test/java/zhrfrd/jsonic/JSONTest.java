@@ -78,6 +78,66 @@ class JSONTest {
     }
 
     @Test
+    void getObject_emptyObjectWithMissingClosingBrace_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("{");
+            json.getObject();
+        }, "Parsing an empty object with missing closing brace and calling getObject() method should throw an exception.");
+    }
+
+    @Test
+    void getObject_emptyObjectWithMissingOpeningBrace_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("}");
+            json.getObject();
+        }, "Parsing an empty object with missing opening brace and calling getObject() method should throw an exception.");
+    }
+
+    @Test
+    void getObject_nonEmptyObjectWithMissingClosingBrace_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("{1:2");
+            json.getObject();
+        }, "Parsing an empty object with missing last brace and calling getObject() method should throw an exception.");
+    }
+
+    @Test
+    void getObject_nonEmptyObjectStringToString_returnParsedObject() {
+        JSON json = new JSON("{\"a\" : \"b\"}");
+        Object obj = json.getObject();
+        assertInstanceOf(Map.class, obj, "Parsed object should be a Map.");
+
+        Map<?, ?> map = (Map<?, ?>)obj;
+        assertEquals(1, map.size(), "Object should contain exactly 1 entry.");
+        assertTrue(map.containsKey("a"), "Object should contain key 'a'.");
+        assertEquals("b", map.get("a"), "Value for key 'a' should be 'b'.");
+    }
+
+    @Test
+    void getObject_nonEmptyObjectStringToInteger_returnParsedObject() {
+        JSON json = new JSON("{\"a\" : 3}");
+        Object obj = json.getObject();
+        assertInstanceOf(Map.class, obj, "Parsed object should be a Map.");
+
+        Map<?, ?> map = (Map<?, ?>)obj;
+        assertEquals(1, map.size(), "Object should contain exactly 1 entry.");
+        assertTrue(map.containsKey("a"), "Object should contain key 'a'.");
+        assertEquals(3, map.get("a"), "Value for key 'a' should be 3.");
+    }
+
+    @Test
+    void getObject_nonEmptyObjectStringToDouble_returnParsedObject() {
+        JSON json = new JSON("{\"a\" : 3.5}");
+        Object obj = json.getObject();
+        assertInstanceOf(Map.class, obj, "Parsed object should be a Map.");
+
+        Map<?, ?> map = (Map<?, ?>)obj;
+        assertEquals(1, map.size(), "Object should contain exactly 1 entry.");
+        assertTrue(map.containsKey("a"), "Object should contain key 'a'.");
+        assertEquals(3.5, map.get("a"), "Value for key 'a' should be 3.5.");
+    }
+
+    @Test
     void getObject_string_throwException() {
         assertThrows(IllegalStateException.class, () -> {
             JSON json = new JSON("\"Hello\"");
@@ -109,11 +169,11 @@ class JSONTest {
         }, "Parsing a literal and calling getObject() method should throw an exception.");
     }
 
-//    @Test
-//    void getObject_number_throwException() {
-//        assertThrows(IllegalStateException.class, () -> {
-//            JSON json = new JSON("42");
-//            json.getObject();
-//        }, "Parsing a literal and calling getObject() method should throw an exception.");
-//    }
+    @Test
+    void getObject_number_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("42");
+            json.getObject();
+        }, "Parsing a literal and calling getObject() method should throw an exception.");
+    }
 }
