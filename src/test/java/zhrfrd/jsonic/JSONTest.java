@@ -127,14 +127,14 @@ class JSONTest {
 
     @Test
     void getObject_nonEmptyObjectStringToDouble_returnParsedObject() {
-        JSON json = new JSON("{\"a\" : 3.5}");
+        JSON json = new JSON("{\"a\" : 3.534}");
         Object obj = json.getObject();
         assertInstanceOf(Map.class, obj, "Parsed object should be a Map.");
 
         Map<?, ?> map = (Map<?, ?>)obj;
         assertEquals(1, map.size(), "Object should contain exactly 1 entry.");
         assertTrue(map.containsKey("a"), "Object should contain key 'a'.");
-        assertEquals(3.5, map.get("a"), "Value for key 'a' should be 3.5.");
+        assertEquals(3.534, map.get("a"), "Value for key 'a' should be 3.5.");
     }
 
     @Test

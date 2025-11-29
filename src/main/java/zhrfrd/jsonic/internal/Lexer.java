@@ -36,7 +36,6 @@ public class Lexer {
      */
     private void scanJSON() {
         while (indexChar < jsonString.length()) {
-            System.out.println(currentChar);
             if (Character.isWhitespace(currentChar)) {
                 advance();
                 continue;
@@ -81,7 +80,6 @@ public class Lexer {
                 readLiteral();
                 continue;
             }
-
 
             throw new IllegalStateException("Invalid character: " + currentChar);
         }
@@ -141,6 +139,16 @@ public class Lexer {
         while (Character.isDigit(currentChar) && currentChar != ' ' && currentChar != '\n' && currentChar != '\0') {
             sb.append(currentChar);
             advance();
+        }
+
+        if (currentChar == '.') {
+            sb.append('.');
+            advance();
+
+            while (Character.isDigit(currentChar)) {
+                sb.append(currentChar);
+                advance();
+            }
         }
 
         tokens.add(new Token(TokenType.NUMBER, sb.toString()));
