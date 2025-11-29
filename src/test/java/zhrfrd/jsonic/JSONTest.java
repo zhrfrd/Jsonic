@@ -41,7 +41,31 @@ class JSONTest {
         Object obj = json.getObject();
         assertInstanceOf(Map.class, obj, "Parsed object should be a Map");
 
-        Map<?, ?> map = (Map<?, ?>) obj;
+        Map<?, ?> map = (Map<?, ?>)obj;
         assertTrue(map.isEmpty(), "Parsed map should be empty");
+    }
+
+    @Test
+    void getObject_stringInputted_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("\"Hello\"");
+            json.getObject();
+        }, "Calling getObject() to a parsed string should throw an exception");
+    }
+
+    @Test
+    void getObject_emptyInput_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("");
+            json.getObject();
+        }, "Calling getObject() to an empty json should throw an exception");
+    }
+
+    @Test
+    void getObject_emptyArrayInputted_throwException() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSON json = new JSON("[]");
+            json.getObject();
+        }, "Calling getObject() to an empty array should throw an exception");
     }
 }

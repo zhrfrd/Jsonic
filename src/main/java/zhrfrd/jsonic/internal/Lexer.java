@@ -18,6 +18,13 @@ public class Lexer {
      */
     public Lexer(String jsonString) {
         this.jsonString = jsonString;
+
+        if (jsonString == null || jsonString.isEmpty()) {
+            tokens.add(new Token(TokenType.EOF, "\0"));
+            currentChar = '\0';
+            return;
+        }
+
         currentChar = jsonString.charAt(0);
         scanJSON();
     }
