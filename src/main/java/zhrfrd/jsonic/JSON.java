@@ -10,7 +10,7 @@ public class JSON {
 
     public JSON(String jsonString) {
         JSONParser jsonParser = new JSONParser(jsonString);
-        jsonValue = jsonParser.parse(); // store the parsed result
+        jsonValue = jsonParser.parse();
     }
 
     public String getString() {
