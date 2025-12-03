@@ -2,10 +2,12 @@
 
 ![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-Jsonic is a lightweight library for parsing JSON files and easily querying
-JSON objects.
+Jsonic is a lightweight library for parsing JSON files and easily querying JSON objects.
 
 ## Features
+- Parse JSON object.
+- Stringify JSON value.
+- Navigate through the JSON object and extract JSON values such as: objects, arrays, strings, numbers, booleans, nulls.
 
 ## Approach and design choices
 
@@ -61,3 +63,4 @@ Run a specific test class:
 - [Introducing JSON](https://www.json.org/json-en.html).
 - [What is a Lexer, Anyway](dev.to/cad97/what-is-a-lexer-anyway-4kdo).
 - [Crafting Interpreters](https://craftinginterpreters.com/introduction.html).
+- [The JSON Data Interchange Format](https://www.rfc-editor.org/rfc/rfc8259).

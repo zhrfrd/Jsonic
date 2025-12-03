@@ -2,34 +2,30 @@ package zhrfrd.jsonic;
 
 import zhrfrd.jsonic.internal.JSONParser;
 
-import java.lang.reflect.Array;
-import java.util.Map;
+/**
+ * Entry point for working with the Jsonic JSON library.
+ * <p>This class  cannot be instantiated.</p>
+ */
+public final class JSON {
+    private JSON() {}
 
-public class JSON {
-    private final Object jsonValue;
-
-    public JSON(String jsonString) {
-        JSONParser jsonParser = new JSONParser(jsonString);
-        jsonValue = jsonParser.parse();
+    /**
+     * Parses the given JSON string and returns the resulting {@link JSONValue}.
+     * @param jsonString The JSON input string to parse.
+     * @return The parsed JSON representation.
+     * @throws IllegalArgumentException if the input is not valid JSON.
+     */
+    public static JSONValue parse(String jsonString) {
+        JSONParser parser = new JSONParser(jsonString);
+        return parser.parse();
     }
 
-    public String getString() {
-        if (jsonValue instanceof String s) {
-            return s;
-        }
-
-        throw new IllegalStateException("JSON value is not a string.");
-    }
-
-    public Object getObject() {
-        if (jsonValue instanceof Map<?, ?> map) {
-            return map;
-        }
-
-        throw new IllegalStateException("JSON value is not an object.");
-    }
-
-    public Array getArray() {
-        return null;
+    /**
+     * Converts a {@link JSONValue} into its JSON string representation.
+     * @param value The JSON value to stringify.
+     * @return The JSON-formatted string representing the {@link JSONValue}.
+     */
+    public static String stringify(JSONValue value) {
+        return value.toString();
     }
 }
