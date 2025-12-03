@@ -19,13 +19,4 @@ public final class JSON {
         JSONParser parser = new JSONParser(jsonString);
         return parser.parse();
     }
-
-    /**
-     * Converts a {@link JSONValue} into its JSON string representation.
-     * @param value The JSON value to stringify.
-     * @return The JSON-formatted string representing the {@link JSONValue}.
-     */
-    public static String stringify(JSONValue value) {
-        return value.toString();
-    }
 }

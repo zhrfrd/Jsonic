@@ -25,9 +25,4 @@ public final class JSONBoolean implements JSONValue {
     public Boolean asBoolean() {
         return value;
     }
-
-    @Override
-    public String toString() {
-        return Boolean.toString(value);
-    }
 }

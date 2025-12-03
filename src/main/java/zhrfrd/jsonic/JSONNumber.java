@@ -23,9 +23,4 @@ public final class JSONNumber implements JSONValue {
     public Number asNumber() {
         return value;
     }
-
-    @Override
-    public String toString() {
-        return value.toString();
-    }
 }

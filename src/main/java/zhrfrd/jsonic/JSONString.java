@@ -23,9 +23,4 @@ public final class JSONString implements JSONValue {
     public String asString() {
         return value;
     }
-
-    @Override
-    public String toString() {
-        return "\"" + value + "\"";
-    }
 }

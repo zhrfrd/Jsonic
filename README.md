@@ -91,8 +91,8 @@ Jsonic/
 │   ├── main/
 │   │   └── java/
 │   │       ├── zhrfrd/jsonic/
-│   │       │    ├── JSON.java            # Main API
-│   │       │    ├── JSONValue.java       # Base interface
+│   │       │    ├── JSON.java   # Main API
+│   │       │    ├── JSONValue.java   # Base interface
 │   │       │    ├── JSONObject.java
 │   │       │    ├── JSONArray.java
 │   │       │    ├── JSONString.java

@@ -42,9 +42,4 @@ public final class JSONArray implements JSONValue {
     public JSONArray asArray() {
         return this;
     }
-
-    @Override
-    public String toString() {
-        return list.toString();
-    }
 }

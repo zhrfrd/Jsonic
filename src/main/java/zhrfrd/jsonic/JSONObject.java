@@ -79,9 +79,4 @@ public final class JSONObject implements JSONValue {
     public JSONObject asObject() {
         return this;
     }
-
-    @Override
-    public String toString() {
-        return map.toString();
-    }
 }

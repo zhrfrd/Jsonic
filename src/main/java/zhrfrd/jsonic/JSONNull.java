@@ -28,9 +28,4 @@ public final class JSONNull implements JSONValue {
     public boolean isNull() {
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "null";
-    }
 }
