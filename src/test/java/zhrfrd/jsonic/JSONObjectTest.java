@@ -5,16 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JSONObjectTest {
     @Test
-    void testEmptyObject() {
-        JSONObject obj = JSON.parse("{}").asObject();
-        assertNotNull(obj);
+    void asObject_shouldIdentifyTheCreationOfTheEmptyObjectWhenParsingAnEmptyObject() {
+        JSONValue jsonValue = JSON.parse("{}");
+        JSONObject jsonObj = jsonValue.asObject();
+        assertNotNull(jsonObj);
     }
 
     @Test
-    void testSimpleObject() {
+    void getString_shouldReturnTheStringValueAssignedToTheSpecifiedObjectAttribute() {
         JSONObject obj = JSON.parse("{\"name\":\"Bubba\",\"age\":25}").asObject();
-
         assertEquals("Bubba", obj.getString("name"));
+    }
+
+    @Test
+    void getString_shouldReturnTheNumberValueAssignedToTheSpecifiedObjectAttribute() {
+        JSONObject obj = JSON.parse("{\"name\":\"Bubba\",\"age\":25}").asObject();
         assertEquals(25, obj.getNumber("age"));
     }
 
@@ -42,5 +47,13 @@ public class JSONObjectTest {
 
         assertThrows(IllegalStateException.class, x::asString);
         assertThrows(IllegalStateException.class, x::asArray);
+    }
+
+    @Test
+    void getArray_shouldReturnTheArrayThatLivesInsideTheObject() {
+        JSONObject obj = JSON.parse("{\"numbers\":[10,20]}").asObject();
+
+        JSONArray arr = obj.getArray("numbers");
+        assertEquals(10, arr.get(0).asNumber());
     }
 }

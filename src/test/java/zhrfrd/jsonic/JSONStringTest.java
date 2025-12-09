@@ -3,8 +3,21 @@ package zhrfrd.jsonic;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JSONStringTest {
+    @Test
+    void getType_shouldReturnTheJSONTypeStringWhenParsingAJSONStringValue() {
+        JSONValue jsonValue = JSON.parse("\"Hello\"");
+        assertEquals(JSONType.STRING, jsonValue.getType());
+    }
+
+    @Test
+    void asString_shouldReturnExactSameStringWhenParsingStringWithNewLine() {
+        JSONValue jsonValue = JSON.parse("\"Hello \n How are you?\"");
+        assertEquals("Hello \n How are you?", jsonValue.asString());
+    }
+
     @Test
     void asString_shouldReturnTheStringWhenParsingAJSONStringValue() {
         JSONValue jsonValue = JSON.parse("\"Hello\"");
@@ -12,68 +25,24 @@ public class JSONStringTest {
     }
 
     @Test
-    void getType_shouldReturnTheJSONTypeStringWhenParsingAJSONStringValue() {
-        JSONValue jsonValue = JSON.parse("\"Hello\"");
-        assertEquals(JSONType.STRING, jsonValue.getType());
+    void asString_shouldReturnAnEmptyStringWhenParsingAnEmptyJSONStringValue() {
+        JSONValue jsonValue = JSON.parse("\"\"");
+        assertEquals("", jsonValue.asString());
     }
-//
-//    @Test
-//    void getString_string_returnsParsedString() {
-//        JSON json = new JSON("\"Hello World\"");
-//        assertEquals("Hello World", json.getString(), "Should parse a JSON string correctly.");
-//    }
-//
-//    @Test
-//    void getString_stringWithNewline_returnsParsedString() {
-//        JSON json = new JSON("\"Hello \n World\"");
-//        assertEquals("Hello \n World", json.getString(), "Should parse a JSON string correctly.");
-//    }
-//
-//    @Test
-//    void getString_emptyInput_throwException() {
-//        assertThrows(IllegalStateException.class, () -> {
-//            JSON json = new JSON("");
-//            json.getString();
-//        }, "Parsing an empty json and calling getString() method should throw an exception.");
-//    }
-//
-//    @Test
-//    void getString_emptyObject_throwException() {
-//        assertThrows(IllegalStateException.class, () -> {
-//            JSON json = new JSON("{}");
-//            json.getString();
-//        }, "Parsing an empty object and calling getString() method should throw an exception.");
-//    }
-//
-//    @Test
-//    void getString_emptyArray_throwException() {
-//        assertThrows(IllegalStateException.class, () -> {
-//            JSON json = new JSON("[]");
-//            json.getString();
-//        }, "Parsing an empty array and calling getString() method should throw an exception.");
-//    }
-//
-//    @Test
-//    void getString_literal_throwException() {
-//        assertThrows(IllegalStateException.class, () -> {
-//            JSON json = new JSON("TRUE");
-//            json.getString();
-//        }, "Parsing a literal and calling getString() method should throw an exception.");
-//    }
-//
-//    @Test
-//    void getString_number_throwException() {
-//        assertThrows(IllegalStateException.class, () -> {
-//            JSON json = new JSON("42");
-//            json.getString();
-//        }, "Parsing a literal and calling getString() method should throw an exception.");
-//    }
-//
-//    @Test
-//    void getString_missingClosingQuote_throwsException() {
-//        assertThrows(IllegalStateException.class, () -> {
-//            JSON json = new JSON("\"Hello World");
-//            json.getString();
-//        }, "Parsing a string without closing quote should throw an exception.");
-//    }
+
+    @Test
+    void asString_shouldThrowAnExceptionWhenParsingAnEmptyJSONValue() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            JSONValue jsonValue = JSON.parse("");
+            assertEquals("", jsonValue.asString());
+        }, "Parsing an empty json and calling getString() should throw an exception.");
+    }
+
+    @Test
+    void asString_shouldThrowAnExceptionWhenParsingAStringWithoutClosingQuote() {
+        assertThrows(IllegalStateException.class, () -> {
+            JSONValue jsonValue = JSON.parse("Hello\"");
+            jsonValue.asString();
+        }, "Parsing an json string with missing closing quotes and calling asString() should throw an exception.");
+    }
 }

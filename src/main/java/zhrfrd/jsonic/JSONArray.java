@@ -17,20 +17,20 @@ public final class JSONArray implements JSONValue {
     }
 
     /**
+     * Get the {@code JSONArray} size.
+     * @return The integer representing how many elements are contained in the {@code JSONArray}.
+     */
+    public int size() {
+        return list.size();
+    }
+
+    /**
      * Get the raw JSON value at the specified index.
      * @param index The index of the value to retrieve.
      * @return The corresponding {@code JSONValue}.
      */
     public JSONValue get(int index) {
         return list.get(index);
-    }
-
-    /**
-     * Get the {@code JSONArray} size.
-     * @return The integer representing how many elements are contained in the {@code JSONArray}.
-     */
-    public int size() {
-        return list.size();
     }
 
     @Override

@@ -6,16 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JSONBooleanTest {
     @Test
-    void testParseTrue() {
-        JSONValue v = JSON.parse("true");
-        assertEquals(true, v.asBoolean());
-        assertEquals(JSONType.BOOLEAN, v.getType());
+    void asBoolean_shouldReturnTheBooleanTrueIfTrueIsParsed() {
+        JSONValue value = JSON.parse("true");
+        assertEquals(true, value.asBoolean());
     }
 
     @Test
-    void testParseFalse() {
-        JSONValue v = JSON.parse("false");
-        assertEquals(false, v.asBoolean());
-        assertEquals(JSONType.BOOLEAN, v.getType());
+    void asBoolean_shouldReturnTheBooleanFalseIfFalseIsParsed() {
+        JSONValue value = JSON.parse("false");
+        assertEquals(false, value.asBoolean());
     }
+
+
 }

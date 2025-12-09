@@ -38,7 +38,7 @@ public class JSONParser {
             case STRING -> parseString();
             case NUMBER -> parseNumber();
             case TRUE, FALSE, NULL -> parseLiteral();
-            case EOF -> null;   // JSONNull.INSTANCE;
+            case EOF -> throw new IllegalArgumentException("Empty or invalid JSON input");   // JSONNull.INSTANCE;
             default -> throw new IllegalStateException("Invalid token: " + currentToken.getTokenType());
         };
     }
