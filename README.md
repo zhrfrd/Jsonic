@@ -44,7 +44,7 @@ The Lexer, Parser, and Value Model are kept isolated and inaccessible to the use
 
 ## Requirements
 
-- Java JDK 22 or higher.
+- Java JDK 17.
 - Maven 3.6.0 or higher (for building and running tests).
 - JUnit 5 5.10.0 (for unit testing).
 
